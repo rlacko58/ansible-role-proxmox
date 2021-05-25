@@ -80,7 +80,7 @@ Example Playbook
     - proxmox-containers
 
   tasks:
-    - name: Create container
+    - name: Destroy containers
       include_role:
         name: proxmox-containers
         tasks_from: destroy
