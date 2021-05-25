@@ -1,0 +1,45 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Create CT
+  command: >-
+    pct create {{ vmid }} {{ ostemplate }}
+    {% if arch is defined %}--arch {{ arch }}{% endif %}
+    {% if bwlimit is defined %}--bwlimit {{ bwlimit }}{% endif %}
+    {% if cmode is defined %}--cmode {{ cmode }}{% endif %}
+    {% if console is defined %}--console {{ console }}{% endif %}
+    {% if cores is defined %}--cores {{ cores }}{% endif %}
+    {% if cpulimit is defined %}--cpulimit {{ cpulimit }}{% endif %}
+    {% if cpuunits is defined %}--cpuunits {{ cpuunits }}{% endif %}
+    {% if debug is defined %}--debug {{ debug }}{% endif %}
+    {% if description is defined %}--description {{ description }}{% endif %}
+    {% if features is defined %}--features {{ features }}{% endif %}
+    {% if force is defined %}--force {{ force }}{% endif %}
+    {% if hookscript is defined %}--hookscript {{ hookscript }}{% endif %}
+    {% if hostname is defined %}--hostname {{ hostname }}{% endif %}
+    {% if ignore_unpack_errors is defined %}--ignore-unpack-errors {{ ignore_unpack_errors }}{% endif %}
+    {% if lock is defined %}--lock {{ lock }}{% endif %}
+    {% if memory is defined %}--memory {{ memory }}{% endif %}
+    {% if mp_arr is defined %}{% for mp in mp_arr %}--mp{{mp.n}} {{ mp.args }}{% endfor %}{% endif%}
+    {% if nameserver is defined %}--nameserver {{ nameserver }}{% endif %}
+    {% if net_arr is defined %}{% for net in net_arr %}--net{{net.n}} {{ net.args }}{% endfor %}{% endif %}
+    {% if onboot is defined %}--onboot {{ onboot }}{% endif %}
+    {% if ostype is defined %}--ostype {{ ostype }}{% endif %}
+    {% if password is defined %}--password {{ password }}{% endif %}
+    {% if pool is defined %}--pool {{ pool }}{% endif %}
+    {% if protection is defined %}--protection {{ protection }}{% endif %}
+    {% if restore is defined %}--restore {{ restore }}{% endif %}
+    {% if rootfs is defined %}--rootfs {{ rootfs }}{% endif %}
+    {% if searchdomain is defined %}--searchdomain {{ searchdomain }}{% endif %}
+    {% if ssh_public_keys is defined %}--ssh-public-keys {{ ssh_public_keys }}{% endif %}
+    {% if start is defined %}--start {{ start }}{% endif %}
+    {% if startup is defined %}--startup {{ startup }}{% endif %}
+    {% if storage is defined %}--storage {{ storage }}{% endif %}
+    {% if swap is defined %}--swap {{ swap }}{% endif %}
+    {% if tags is defined %}--tags {{ tags }}{% endif %}
+    {% if template is defined %}--template {{ template }}{% endif %}
+    {% if timezone is defined %}--timezone {{ timezone }}{% endif %}
+    {% if tty is defined %}--tty {{ tty }}{% endif %}
+    {% if unique is defined %}--unique {{ unique }}{% endif %}
+    {% if unprivileged is defined %}--unprivileged {{ unprivileged }}{% endif %}
+    {% if unused_arr is defined %}{% for unused in unused_arr %}--unused{{unused.n}} {{ unused.args }}{% endfor %}{% endif %}
