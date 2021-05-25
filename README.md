@@ -74,11 +74,6 @@ Example Playbook
 **destroy**:
 
 ```yml
-- hosts: all
-  become: false
-  roles:
-    - proxmox-containers
-
   tasks:
     - name: Destroy containers
       include_role:
@@ -94,6 +89,22 @@ Example Playbook
         - 912
         - 996
 ```
+
+**clone**:
+```yml
+  tasks:
+    - name: Clone containers
+      include_role:
+        name: proxmox-containers
+        tasks_from: clone
+      vars:
+        vmid: 911
+        newid: 912
+        description: "Cloned with ansible"
+        hostname: "clone"
+        storage: "ssd"
+```
+
 License
 -------
 
