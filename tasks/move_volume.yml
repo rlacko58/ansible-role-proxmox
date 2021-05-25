@@ -1,0 +1,9 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Move Volume CT
+  command: >-
+    pct move_volume {{ vmid }} {{ volume }} "{{ storage }}"
+    {% if bwlimit is defined %}--bwlimit {{ bwlimit }}{% endif %}
+    {% if delete is defined %}--delete {{ delete }}{% endif %}
+    {% if digest is defined %}--digest "{{ digest }}"{% endif %}

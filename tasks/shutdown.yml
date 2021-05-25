@@ -1,0 +1,8 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Shutdown CT
+  command: >-
+    pct shutdown {{ vmid }}
+    {% if forceStop is defined %}--forceStop {{ forceStop }}{% endif %}
+    {% if timeout is defined %}--timeout {{ timeout }}{% endif %}

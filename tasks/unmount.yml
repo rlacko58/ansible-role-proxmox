@@ -1,0 +1,6 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Unmount CT
+  command: >-
+    pct unmount {{ vmid }}

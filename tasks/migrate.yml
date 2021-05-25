@@ -1,0 +1,11 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Migrate CT
+  command: >-
+    pct migrate {{ vmid }} "{{ target }}"
+    {% if bwlimit is defined %}--bwlimit {{ bwlimit }}{% endif %}
+    {% if force is defined %}--force {{ force }}{% endif %}
+    {% if online is defined %}--online {{ online }}{% endif %}
+    {% if restart is defined %}--restart {{ restart }}{% endif %}
+    {% if timeout is defined %}--timeout {{ timeout }}{% endif %}
