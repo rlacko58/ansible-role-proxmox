@@ -37,6 +37,8 @@ Output:
 pct create 999 local:vztmpl/ubuntu-21.04-standard_21.04-1_amd64.tar.gz --rootfs ssd:8 --cores 2 --net0 name=eth0,bridge=vmbr0,ip=dhcp --password 12345
 ```
 
+If the argument has a `-`, then it replaced with `_`.  
+For example: `ignore-unpack-errors` becomes `ignore_unpack_errors`
 
 Dependencies
 ------------
@@ -67,6 +69,30 @@ Example Playbook
           - n: 0
             args: 'name=eth0,bridge=vmbr0,ip=dhcp'
         password: '12345'
+```
+
+**destroy**:
+
+```yml
+- hosts: all
+  become: false
+  roles:
+    - proxmox-containers
+
+  tasks:
+    - name: Create container
+      include_role:
+        name: proxmox-containers
+        tasks_from: destroy
+      vars:
+        vmid: "{{ item }}"
+        destroy_unreferenced_disks: 1
+        force: 1
+        purge: 1
+      loop:
+        - 911
+        - 912
+        - 996
 ```
 License
 -------

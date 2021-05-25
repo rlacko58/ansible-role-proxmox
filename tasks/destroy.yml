@@ -1,0 +1,9 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Destroy CT
+  command: >-
+    pct destroy {{ vmid }}
+    {% if destroy_unreferenced_disks is defined %}--destroy-unreferenced-disks {{ destroy_unreferenced_disks }}{% endif %}
+    {% if force is defined %}--force {{ force }}{% endif %}
+    {% if purge is defined %}--purge {{ purge }}{% endif %}
