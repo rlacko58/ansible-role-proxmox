@@ -1,0 +1,8 @@
+---
+# https://pve.proxmox.com/pve-docs/pct.1.html
+
+- name: Start CT
+  command: >-
+    pct start {{ vmid }}
+    {% if debug is defined %}--debug {{ debug }}{% endif %}
+    {% if skiplock is defined %}--skiplock {{ skiplock }}{% endif %}

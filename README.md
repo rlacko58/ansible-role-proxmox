@@ -105,6 +105,34 @@ Example Playbook
         storage: "ssd"
 ```
 
+**start**:
+```yml
+  tasks:
+    - name: Start containers
+      include_role:
+        name: proxmox-containers
+        tasks_from: start
+      vars:
+        vmid: "{{ item }}"
+      loop:
+        - 911
+        - 912
+```
+
+**stop**:
+```yml
+    tasks:
+    - name: Stop containers
+      include_role:
+        name: proxmox-containers
+        tasks_from: stop
+      vars:
+        vmid: "{{ item }}"
+      loop:
+        - 911
+        - 912
+```
+
 License
 -------
 
