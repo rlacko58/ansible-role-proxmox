@@ -2,7 +2,7 @@ galaxy_info:
   author: László Rafael
   description: Ansible Role for Proxmox Containers using pct commands
 
-  issue_tracker_url: https://gitlab.com/rlacko58/ansible-role-proxmox-pct/-/issues
+  issue_tracker_url: https://gitlab.com/rlacko58/ansible-role-proxmox/-/issues
 
   license: MIT
 
