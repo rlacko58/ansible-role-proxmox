@@ -3,5 +3,5 @@
 
 - name: Snapshot CT
   command: >-
-    pct snapshot {{ vmid }} {{ snapname }}
+    pct snapshot {{ vmid }} "{{ snapname }}"
     {% if description is defined %}--description {{ description }}{% endif %}

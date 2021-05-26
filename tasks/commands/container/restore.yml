@@ -1,9 +1,9 @@
 ---
 # https://pve.proxmox.com/pve-docs/pct.1.html
 
-- name: Create CT
+- name: Restore CT
   command: >-
-    pct create {{ vmid }} "{{ ostemplate }}"
+    pct restore {{ vmid }} "{{ ostemplate }}"
     {% if arch is defined %}--arch {{ arch }}{% endif %}
     {% if bwlimit is defined %}--bwlimit {{ bwlimit }}{% endif %}
     {% if cmode is defined %}--cmode {{ cmode }}{% endif %}
@@ -28,7 +28,6 @@
     {% if password is defined %}--password {{ password }}{% endif %}
     {% if pool is defined %}--pool "{{ pool }}"{% endif %}
     {% if protection is defined %}--protection {{ protection }}{% endif %}
-    {% if restore is defined %}--restore {{ restore }}{% endif %}
     {% if rootfs is defined %}--rootfs {{ rootfs }}{% endif %}
     {% if searchdomain is defined %}--searchdomain "{{ searchdomain }}"{% endif %}
     {% if ssh_public_keys is defined %}--ssh-public-keys {{ ssh_public_keys }}{% endif %}

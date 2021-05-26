@@ -1,0 +1,51 @@
+---
+# Check if container is available or taken
+- name: Check if Container exists
+  shell: "if pct status {{ vmid }} > /dev/null 2>&1; then echo true; else echo false; fi"
+  register: container_exists
+  changed_when: false
+
+- name: Check if VM exists with the given vmid
+  shell: "if qm status {{ vmid }} > /dev/null 2>&1; then echo true; else echo false; fi"
+  register: vm_exists
+  when: container_exists.stdout is match("false")
+  changed_when: false
+
+- name: "Stop execution if VM exists"
+  meta: end_play
+  when: not container_exists and vm_exists.stdout is match("false")
+
+# Create new Container if doesn't exist
+
+- name: Create Container
+  import_tasks: "commands/container/create.yml"
+  when: container_exists.stdout is match("false")
+
+# Update container and reboot if exists
+
+- name: Update Container
+  import_tasks: "commands/container/set.yml"
+  when: container_exists.stdout is match("true")
+
+# State
+
+- name: Check status of container
+  shell: "pct status {{ vmid }}"
+  register: container_status
+  changed_when: false
+
+- name: Reboot
+  import_tasks: "commands/container/reboot.yml"
+  when: 'state is defined and state == "reboot" and container_status.stdout is match("status: running")'
+
+- name: Start if Reboot requested and stopped or just Start requested
+  import_tasks: "commands/container/start.yml"
+  when: 'state is defined and (state == "reboot" or state == "start") and container_status.stdout is match("status: stopped")'
+
+- name: Stop
+  import_tasks: "commands/container/stop.yml"
+  when: 'state is defined and state == "stop" and container_status.stdout is match("status: running")'
+
+- name: Shutdown
+  import_tasks: "commands/container/shutdown.yml"
+  when: 'state is defined and state == "shutdown" and container_status.stdout is match("status: running")'
