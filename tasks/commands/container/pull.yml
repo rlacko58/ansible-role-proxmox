@@ -1,9 +1,0 @@
----
-# https://pve.proxmox.com/pve-docs/pct.1.html
-
-- name: Pull CT
-  command: >-
-    pct pull {{ vmid }} "{{ path }}" "{{ destination }}"
-    {% if group is defined %}--group "{{ group }}"{% endif %}
-    {% if perms is defined %}--perms "{{ perms }}"{% endif %}
-    {% if user is defined %}--user "{{ user }}"{% endif %}

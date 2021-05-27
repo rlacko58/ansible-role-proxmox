@@ -1,7 +1,0 @@
----
-# https://pve.proxmox.com/pve-docs/pct.1.html
-
-- name: Snapshot CT
-  command: >-
-    pct snapshot {{ vmid }} "{{ snapname }}"
-    {% if description is defined %}--description {{ description }}{% endif %}

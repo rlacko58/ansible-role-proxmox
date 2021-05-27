@@ -1,6 +1,0 @@
----
-# https://pve.proxmox.com/pve-docs/pct.1.html
-
-- name: Suspend CT
-  command: >-
-    pct suspend {{ vmid }}

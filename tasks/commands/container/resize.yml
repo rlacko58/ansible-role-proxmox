@@ -1,7 +1,0 @@
----
-# https://pve.proxmox.com/pve-docs/pct.1.html
-
-- name: Resize CT
-  command: >-
-    pct resize {{ vmid }} {{ disk }} {{ size }}
-    {% if digest is defined %}--digest {{ digest }}{% endif %}

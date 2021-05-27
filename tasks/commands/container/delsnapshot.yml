@@ -1,7 +1,0 @@
----
-# https://pve.proxmox.com/pve-docs/pct.1.html
-
-- name: Delsnapshot CT
-  command: >-
-    pct delsnapshot {{ vmid }} "{{ snapname }}"
-    {% if force is defined %}--force {{ force }}{% endif %}
