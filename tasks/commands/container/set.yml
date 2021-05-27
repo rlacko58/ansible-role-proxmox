@@ -26,7 +26,7 @@
     {% if ostype is defined %}--ostype {{ ostype }}{% endif %}
     {% if protection is defined %}--protection {{ protection }}{% endif %}
     {% if revert is defined %}--revert "{{ revert }}"{% endif %}
-    {% if rootfs is defined %}--rootfs {{ rootfs }}{% endif %}
+    {% if rootfs_set is defined %}--rootfs {{ rootfs_set }}{% endif %}
     {% if searchdomain is defined %}--searchdomain "{{ searchdomain }}"{% endif %}
     {% if startup is defined %}--startup {{ startup }}{% endif %}
     {% if swap is defined %}--swap {{ swap }}{% endif %}

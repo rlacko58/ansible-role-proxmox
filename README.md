@@ -40,6 +40,10 @@ pct create 999 local:vztmpl/ubuntu-21.04-standard_21.04-1_amd64.tar.gz --rootfs 
 If the argument has a `-`, then it replaced with `_`.  
 For example: `ignore-unpack-errors` becomes `ignore_unpack_errors`
 
+`rootfs` argument is separated into `rootfs_create` and `rootfs_set`. 
+The reason for that is when you create it with for example `ssd:8`, proxmox will generate
+the necessary files and from that point you will have to provide the disks exact location. (e.g. `ssd:vm-103-disk-0,size=8G`)
+
 Dependencies
 ------------
 

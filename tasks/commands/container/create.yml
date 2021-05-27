@@ -29,7 +29,7 @@
     {% if pool is defined %}--pool "{{ pool }}"{% endif %}
     {% if protection is defined %}--protection {{ protection }}{% endif %}
     {% if restore is defined %}--restore {{ restore }}{% endif %}
-    {% if rootfs is defined %}--rootfs {{ rootfs }}{% endif %}
+    {% if rootfs_create is defined %}--rootfs {{ rootfs_create }}{% endif %}
     {% if searchdomain is defined %}--searchdomain "{{ searchdomain }}"{% endif %}
     {% if ssh_public_keys is defined %}--ssh-public-keys {{ ssh_public_keys }}{% endif %}
     {% if start is defined %}--start {{ start }}{% endif %}
