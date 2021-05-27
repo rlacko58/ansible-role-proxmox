@@ -1,4 +1,11 @@
 ---
+# Validate rootfs variable
+- name: "rootfs variable check"
+  fail:
+    msg: >-
+      rootfs variable should be defined in 'rootfs_create' or 'rootfs_set'!
+  when: rootfs is defined
+
 # Check if container is available or taken
 - name: Check if Container exists
   shell: "if pct status {{ vmid }} > /dev/null 2>&1; then echo true; else echo false; fi"
