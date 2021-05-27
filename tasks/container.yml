@@ -19,20 +19,22 @@
 
 - name: Create Container
   import_tasks: "commands/container/create.yml"
-  when: container_exists.stdout is match("false")
+  when: state is undefined and container_exists.stdout is match("false")
 
-# Update container and reboot if exists
+# Update container with set command
 
 - name: Update Container
   import_tasks: "commands/container/set.yml"
-  when: container_exists.stdout is match("true")
+  when: state is undefined and container_exists.stdout is match("true")
 
-# State
+# Store current state
 
 - name: Check status of container
   shell: "pct status {{ vmid }}"
   register: container_status
   changed_when: false
+
+# Change State
 
 - name: Reboot
   import_tasks: "commands/container/reboot.yml"
@@ -49,3 +51,10 @@
 - name: Shutdown
   import_tasks: "commands/container/shutdown.yml"
   when: 'state is defined and state == "shutdown" and container_status.stdout is match("status: running")'
+
+# Destroy
+
+- name: Destroy
+  import_tasks: "commands/container/destroy.yml"
+  when: 'state is defined and state == "destroy"'
+
