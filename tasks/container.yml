@@ -1,13 +1,15 @@
 ---
-# Validate rootfs variable
-- name: "rootfs variable check"
+# Validation
+
+- name: "check if rootfs variable provided right"
   fail:
     msg: >-
       rootfs variable should be defined in 'rootfs_create' or 'rootfs_set'!
   when: rootfs is defined
 
-# Check if container is available or taken
-- name: Check if Container exists
+# Tasks
+
+- name: Check if Container exists and store it in variable
   shell: "if pct status {{ vmid }} > /dev/null 2>&1; then echo true; else echo false; fi"
   register: container_exists
   changed_when: false
@@ -18,50 +20,58 @@
   when: container_exists.stdout is match("false")
   changed_when: false
 
-- name: "Stop execution if VM exists"
-  meta: end_play
-  when: not container_exists and vm_exists.stdout is match("false")
+- name: "Stop execution if the provided container vmid is taken by a VM"
+  fail:
+    msg: >-
+      The requested vmid is already taken by a VM!
+  when: container_exists.stdout is match("false") and vm_exists.stdout is match("true")
 
-# Create new Container if doesn't exist
-
-- name: Create Container
+- name: Create Container (pct create ...)
   import_tasks: "commands/container/create.yml"
   when: state is undefined and container_exists.stdout is match("false")
 
-# Update container with set command
-
-- name: Update Container
+- name: Update Container (pct set ...)
   import_tasks: "commands/container/set.yml"
   when: state is undefined and container_exists.stdout is match("true")
-
-# Store current state
 
 - name: Check status of container
   shell: "pct status {{ vmid }}"
   register: container_status
   changed_when: false
+  when: state is defined and container_exists.stdout is match("true")
 
-# Change State
-
-- name: Reboot
+- name: Reboot (pct reboot ...)
   import_tasks: "commands/container/reboot.yml"
-  when: 'state is defined and state == "reboot" and container_status.stdout is match("status: running")'
+  when: >-
+    state is defined and state == "reboot" and 
+    container_exists.stdout is match("true") and container_status.stdout is match("status: running")
 
-- name: Start if Reboot requested and stopped or just Start requested
+- name: Start if Reboot requested and stopped or just Start requested (pct start ...)
   import_tasks: "commands/container/start.yml"
-  when: 'state is defined and (state == "reboot" or state == "start") and container_status.stdout is match("status: stopped")'
+  when: >-
+    state is defined and (state == "reboot" or state == "start") and
+    container_exists.stdout is match("true") and container_status.stdout is match("status: stopped")
 
-- name: Stop
+- name: Stop (pct stop ...)
   import_tasks: "commands/container/stop.yml"
-  when: 'state is defined and state == "stop" and container_status.stdout is match("status: running")'
+  when: >-
+    state is defined and state == "stop" and 
+    container_exists.stdout is match("true") and container_status.stdout is match("status: running")
 
-- name: Shutdown
+- name: Shutdown (pct shutdown ...)
   import_tasks: "commands/container/shutdown.yml"
-  when: 'state is defined and state == "shutdown" and container_status.stdout is match("status: running")'
+  when: >-
+    state is defined and state == "shutdown" and 
+    container_exists.stdout is match("true") and container_status.stdout is match("status: running")
 
-# Destroy
-
-- name: Destroy
+- name: Destroy (pct destroy ...)
   import_tasks: "commands/container/destroy.yml"
-  when: 'state is defined and state == "destroy"'
+  when: >-
+    state is defined and state == "destroy" and container_exists.stdout is match("true")
+
+- name: Already destroyed
+  debug:
+    msg: Container is already destroyed
+  when: >-
+    state is defined and state == "destroy" and container_exists.stdout is match("false")
 
