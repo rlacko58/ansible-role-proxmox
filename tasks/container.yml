@@ -74,4 +74,3 @@
     msg: Container is already destroyed
   when: >-
     state is defined and state == "destroy" and container_exists.stdout is match("false")
-
