@@ -63,7 +63,7 @@ Example Playbook
     - name: Create container
       include_role:
         name: rlacko58.proxmox
-        tasks_from: create
+        tasks_from: container
       vars:
         vmid: 999
         ostemplate: local:vztmpl/ubuntu-21.04-standard_21.04-1_amd64.tar.gz
