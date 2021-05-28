@@ -1,0 +1,8 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Template VM
+  command: >-
+    qm template {{ vmid }}
+    {% if disk is defined %}--disk {{ disk }}{% endif %}
+  changed_when: true

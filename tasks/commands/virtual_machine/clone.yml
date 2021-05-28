@@ -1,0 +1,16 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Clone VM
+  command: >-
+    qm clone {{ vmid }} {{newid}}
+    {% if bwlimit is defined %}--bwlimit {{ bwlimit }}{% endif %}
+    {% if description is defined %}--description "{{ description }}"{% endif %}
+    {% if format is defined %}--format {{ format }}{% endif %}
+    {% if full is defined %}--full {{ full }}{% endif %}
+    {% if name is defined %}--name "{{ name }}"{% endif %}
+    {% if pool is defined %}--pool "{{ pool }}"{% endif %}
+    {% if snapname is defined %}--snapname "{{ snapname }}"{% endif %}
+    {% if storage is defined %}--storage "{{ storage }}"{% endif %}
+    {% if target is defined %}--target "{{ target }}"{% endif %}
+  changed_when: true

@@ -1,0 +1,10 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Destroy VM
+  command: >-
+    qm destroy {{ vmid }}
+    {% if destroy_unreferenced_disks is defined %}--destroy-unreferenced-disks {{ destroy_unreferenced_disks }}{% endif %}
+    {% if purge is defined %}--purge {{ purge }}{% endif %}
+    {% if skiplock is defined %}--skiplock {{ skiplock }}{% endif %}
+  changed_when: true

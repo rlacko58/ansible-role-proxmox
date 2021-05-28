@@ -1,0 +1,9 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Importovf to VM
+  command: >-
+    qm importovf {{ vmid }} "{{ manifest }}" "{{ storage }}"
+    {% if dryrun is defined %}--dryrun {{ dryrun }}{% endif %}
+    {% if format is defined %}--format {{ format }}{% endif %}
+  changed_when: true

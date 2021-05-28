@@ -1,0 +1,88 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Create VM
+  command: >-
+    qm create {{ vmid }}
+    {% if acpi is defined %}--acpi {{ acpi }}{% endif %}
+    {% if agent is defined %}--agent {{ agent }}{% endif %}
+    {% if arch is defined %}--arch {{ arch }}{% endif %}
+    {% if archive is defined %}--archive "{{ archive }}"{% endif %}
+    {% if args is defined %}--args "{{ args }}"{% endif %}
+    {% if audio0 is defined %}--audio0 device={{ audio0 }}{% endif %}
+    {% if autostart is defined %}--autostart {{ autostart }}{% endif %}
+    {% if balloon is defined %}--balloon {{ balloon }}{% endif %}
+    {% if bios is defined %}--bios {{ bios }}{% endif %}
+    {% if boot is defined %}--boot {{ boot }}{% endif %}
+    {% if bootdisk is defined %}--bootdisk {{ bootdisk }}{% endif %}
+    {% if bwlimit is defined %}--bwlimit {{ bwlimit }}{% endif %}
+    {% if cdrom is defined %}--cdrom {{ cdrom }}{% endif %}
+    {% if cicustom is defined %}--cicustom {{ cicustom }}{% endif %}
+    {% if cipassword is defined %}--cipassword {{ cipassword }}{% endif %}
+    {% if citype is defined %}--citype {{ citype }}{% endif %}
+    {% if ciuser is defined %}--ciuser "{{ ciuser }}"{% endif %}
+    {% if cores is defined %}--cores {{ cores }}{% endif %}
+    {% if cpu is defined %}--cpu {{ cpu }}{% endif %}
+    {% if cpulimit is defined %}--cpulimit {{ cpulimit }}{% endif %}
+    {% if cpuunits is defined %}--cpuunits {{ cpuunits }}{% endif %}
+    {% if description is defined %}--description "{{ description }}"{% endif %}
+    {% if efidisk0 is defined %}--efidisk0 {{ efidisk0 }}{% endif %}
+    {% if force is defined %}--force {{ force }}{% endif %}
+    {% if freeze is defined %}--freeze {{ freeze }}{% endif %}
+    {% if hookscript is defined %}--hookscript "{{ hookscript }}"{% endif %}
+    {% if hostpci_arr is defined %}{% for hostpci in hostpci_arr %}--hostpci{{ hostpci.n }} {{ hostpci.args }} {% endfor %}{% endif%}
+    {% if hotplug is defined %}--hotplug "{{ hotplug }}"{% endif %}
+    {% if hugepages is defined %}--hugepages {{ hugepages }}{% endif %}
+    {% if ide_arr is defined %}{% for ide in ide_arr %}--ide{{ ide.n }} {{ ide.args }} {% endfor %}{% endif%}
+    {% if ipconfig_arr is defined %}{% for ipconfig in ipconfig_arr %}--ipconfig{{ ipconfig.n }} {{ ipconfig.args }} {% endfor %}{% endif%}
+    {% if ivshmem is defined %}--ivshmem size={{ ivshmem }}{% endif %}
+    {% if keephugepages is defined %}--keephugepages {{ keephugepages }}{% endif %}
+    {% if keyboard is defined %}--keyboard {{ keyboard }}{% endif %}
+    {% if kvm is defined %}--kvm {{ kvm }}{% endif %}
+    {% if live_restore is defined %}--live-restore {{ live_restore }}{% endif %}
+    {% if localtime is defined %}--localtime {{ localtime }}{% endif %}
+    {% if lock is defined %}--lock {{ lock }}{% endif %}
+    {% if machine is defined %}--machine {{ machine }}{% endif %}
+    {% if memory is defined %}--memory {{ memory }}{% endif %}
+    {% if migrate_downtime is defined %}--migrate_downtime {{ migrate_downtime }}{% endif %}
+    {% if migrate_speed is defined %}--migrate_speed {{ migrate_speed }}{% endif %}
+    {% if name is defined %}--name "{{ name }}"{% endif %}
+    {% if nameserver is defined %}--nameserver "{{ nameserver }}"{% endif %}
+    {% if net_arr is defined %}{% for net in net_arr %}--net{{ net.n }} {{ net.args }} {% endfor %}{% endif%}
+    {% if numa is defined %}--numa {{ numa }}{% endif %}
+    {% if numa_arr is defined %}{% for numa in numa_arr %}--numa{{ numa.n }} {{ numa.args }} {% endfor %}{% endif%}
+    {% if ostype is defined %}--ostype {{ ostype }}{% endif %}
+    {% if parallel_arr is defined %}{% for parallel in parallel_arr %}--parallel{{ parallel.n }} {{ parallel.args }} {% endfor %}{% endif%}
+    {% if pool is defined %}--pool "{{ pool }}"{% endif %}
+    {% if protection is defined %}--protection {{ protection }}{% endif %}
+    {% if reboot is defined %}--reboot {{ reboot }}{% endif %}
+    {% if rng0 is defined %}--rng0 {{ rng0 }}{% endif %}
+    {% if sata_arr is defined %}{% for sata in sata_arr %}--sata{{ sata.n }} {{ sata.args }} {% endfor %}{% endif%}
+    {% if scsi_arr is defined %}{% for scsi in scsi_arr %}--scsi{{ scsi.n }} {{ scsi.args }} {% endfor %}{% endif%}
+    {% if scsihw is defined %}--scsihw {{ scsihw }}{% endif %}
+    {% if searchdomain is defined %}--searchdomain "{{ searchdomain }}"{% endif %}
+    {% if serial_arr is defined %}{% for serial in serial_arr %}--serial{{ serial.n }} {{ serial.args }} {% endfor %}{% endif%}
+    {% if shares is defined %}--shares {{ shares }}{% endif %}
+    {% if smbios1 is defined %}--smbios1 {{ smbios1 }}{% endif %}
+    {% if smp is defined %}--smp {{ smp }}{% endif %}
+    {% if sockets is defined %}--sockets {{ sockets }}{% endif %}
+    {% if spice_enhancements is defined %}--spice_enhancements {{ spice_enhancements }}{% endif %}
+    {% if sshkeys is defined %}--sshkeys {{ sshkeys }}{% endif %}
+    {% if start is defined %}--start {{ start }}{% endif %}
+    {% if startdate is defined %}--startdate {{ startdate }}{% endif %}
+    {% if startup is defined %}--startup {{ startup }}{% endif %}
+    {% if storage is defined %}--storage "{{ storage }}"{% endif %}
+    {% if tablet is defined %}--tablet {{ tablet }}{% endif %}
+    {% if tags is defined %}--tags "{{ tags }}"{% endif %}
+    {% if tdf is defined %}--tdf {{ tdf }}{% endif %}
+    {% if template is defined %}--template {{ template }}{% endif %}
+    {% if unique is defined %}--unique {{ unique }}{% endif %}
+    {% if unused_arr is defined %}{% for unused in unused_arr %}--unused{{ unused.n }} {{ unused.args }} {% endfor %}{% endif%}
+    {% if usb_arr is defined %}{% for usb in usb_arr %}--usb{{ usb.n }} {{ usb.args }} {% endfor %}{% endif%}
+    {% if vcpus is defined %}--vcpus {{ vcpus }}{% endif %}
+    {% if vga is defined %}--vga {{ vga }}{% endif %}
+    {% if virtio_arr is defined %}{% for virtio in virtio_arr %}--virtio{{ virtio.n }} {{ virtio.args }} {% endfor %}{% endif%}
+    {% if vmgenid is defined %}--vmgenid {{ vmgenid }}{% endif %}
+    {% if vmstatestorage is defined %}--vmstatestorage "{{ vmstatestorage }}"{% endif %}
+    {% if watchdog is defined %}--watchdog {{ watchdog }}{% endif %}
+  changed_when: true

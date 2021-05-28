@@ -1,0 +1,11 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Start VM
+  command: >-
+    qm shutdown {{ vmid }}
+    {% if forceStop is defined %}--forceStop {{ forceStop }}{% endif %}
+    {% if keepActive is defined %}--keepActive {{ keepActive }}{% endif %}
+    {% if skiplock is defined %}--skiplock {{ skiplock }}{% endif %}
+    {% if timeout is defined %}--timeout {{ timeout }}{% endif %}
+  changed_when: true

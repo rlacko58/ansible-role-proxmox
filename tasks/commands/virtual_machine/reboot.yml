@@ -1,0 +1,8 @@
+---
+# https://pve.proxmox.com/pve-docs/qm.1.html
+
+- name: Reboot VM
+  command: >-
+    qm reboot {{ vmid }}
+    {% if timeout is defined %}--timeout {{ timeout }}{% endif %}
+  changed_when: true
