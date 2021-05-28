@@ -1,4 +1,4 @@
-
+---
 
 - name: Destroy (pct destroy ...)
   import_tasks: "commands/container/destroy.yml"

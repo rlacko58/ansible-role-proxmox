@@ -1,8 +1,6 @@
 ---
 # https://pve.proxmox.com/pve-docs/pct.1.html
 
-
-
 - name: Destroy CT
   command: >-
     pct destroy {{ vmid }}
@@ -10,4 +8,3 @@
     {% if force is defined %}--force {{ force }}{% endif %}
     {% if purge is defined %}--purge {{ purge }}{% endif %}
   changed_when: true
-
