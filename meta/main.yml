@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: docker
+  role_name: proxmox
   author: rlacko58
   description: Ansible Role for Proxmox Containers (will be updated for vms)
 
