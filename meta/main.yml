@@ -1,17 +1,16 @@
 galaxy_info:
-  author: László Rafael
-  description: Ansible Role for Proxmox Containers using pct commands
-
-  issue_tracker_url: https://gitlab.com/rlacko58/ansible-role-proxmox/-/issues
+  role_name: docker
+  author: rlacko58
+  description: Ansible Role for Proxmox Containers (will be updated for vms)
 
   license: MIT
 
   min_ansible_version: 2.1
 
   platforms:
-  - name: Proxmox (Debian) 
+  - name: Proxmox
     versions:
-    - all with pct command line tool
+    - 6.2
 
   galaxy_tags: [proxmox]
 
