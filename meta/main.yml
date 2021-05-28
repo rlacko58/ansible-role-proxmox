@@ -8,9 +8,9 @@ galaxy_info:
   min_ansible_version: 2.1
 
   platforms:
-  - name: Proxmox
+  - name: debian
     versions:
-    - 6.2
+    - buster
 
   galaxy_tags: [proxmox]
 
