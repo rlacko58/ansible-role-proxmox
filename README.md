@@ -53,7 +53,7 @@ Example Playbook
 ----------------
 
 
-**Create**:
+**CREATE or SET if run on existing container**:
 
 ```yml
 - hosts: all
@@ -75,7 +75,7 @@ Example Playbook
         password: '12345'
 ```
 
-**Change state**:
+**CHANGE STATE**:
 
 ```yml
 - hosts: all
@@ -94,7 +94,7 @@ Example Playbook
       - 104
 ```
 
-**Destroy**
+**DESTROY**
 
 ```yml
 - hosts: all
