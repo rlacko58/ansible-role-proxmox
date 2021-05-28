@@ -35,7 +35,7 @@
   when: state is undefined and container_exists.stdout is match("true")
 
 - name: Check status of container
-  shell: "pct status {{ vmid }}"
+  command: 'pct status {{ vmid }}'
   register: container_status
   changed_when: false
   when: state is defined and container_exists.stdout is match("true")

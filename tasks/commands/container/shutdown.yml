@@ -6,3 +6,4 @@
     pct shutdown {{ vmid }}
     {% if forceStop is defined %}--forceStop {{ forceStop }}{% endif %}
     {% if timeout is defined %}--timeout {{ timeout }}{% endif %}
+  changed_when: true

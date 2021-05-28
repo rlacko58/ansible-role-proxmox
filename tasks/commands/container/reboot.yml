@@ -5,3 +5,4 @@
   command: >-
     pct reboot {{ vmid }}
     {% if timeout is defined %}--timeout {{ timeout }}{% endif %}
+  changed_when: true

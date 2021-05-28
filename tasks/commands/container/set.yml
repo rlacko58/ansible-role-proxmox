@@ -19,9 +19,9 @@
     {% if hostname is defined %}--hostname "{{ hostname }}"{% endif %}
     {% if lock is defined %}--lock {{ lock }}{% endif %}
     {% if memory is defined %}--memory {{ memory }}{% endif %}
-    {% if mp_arr is defined %}{% for mp in mp_arr %}--mp{{mp.n}} {{ mp.args }} {% endfor %}{% endif%}
+    {% if mp_arr is defined %}{% for mp in mp_arr %}--mp{{ mp.n }} {{ mp.args }} {% endfor %}{% endif%}
     {% if nameserver is defined %}--nameserver "{{ nameserver }}"{% endif %}
-    {% if net_arr is defined %}{% for net in net_arr %}--net{{net.n}} {{ net.args }} {% endfor %}{% endif %}
+    {% if net_arr is defined %}{% for net in net_arr %}--net{{ net.n }} {{ net.args }} {% endfor %}{% endif %}
     {% if onboot is defined %}--onboot {{ onboot }}{% endif %}
     {% if ostype is defined %}--ostype {{ ostype }}{% endif %}
     {% if protection is defined %}--protection {{ protection }}{% endif %}
@@ -35,4 +35,5 @@
     {% if timezone is defined %}--timezone "{{ timezone }}"{% endif %}
     {% if tty is defined %}--tty {{ tty }}{% endif %}
     {% if unprivileged is defined %}--unprivileged {{ unprivileged }}{% endif %}
-    {% if unused_arr is defined %}{% for unused in unused_arr %}--unused{{unused.n}} {{ unused.args }} {% endfor %}{% endif %}
+    {% if unused_arr is defined %}{% for unused in unused_arr %}--unused{{ unused.n }} {{ unused.args }} {% endfor %}{% endif %}
+  changed_when: true
