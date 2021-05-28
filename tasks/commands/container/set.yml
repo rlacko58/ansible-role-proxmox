@@ -1,6 +1,11 @@
 ---
 # https://pve.proxmox.com/pve-docs/pct.1.html
 
+- name: Get config before Set
+  command: pct config {{ vmid }}
+  register: config_before_set
+  changed_when: false
+
 - name: Set CT
   command: >-
     pct set {{ vmid }}
@@ -36,4 +41,14 @@
     {% if tty is defined %}--tty {{ tty }}{% endif %}
     {% if unprivileged is defined %}--unprivileged {{ unprivileged }}{% endif %}
     {% if unused_arr is defined %}{% for unused in unused_arr %}--unused{{ unused.n }} {{ unused.args }} {% endfor %}{% endif %}
-  changed_when: true
+  changed_when: false
+
+- name: Get config after Set
+  command: pct config {{ vmid }}
+  register: config_after_set
+  changed_when: false
+
+- name: Show difference in config
+  debug:
+    msg: "{{ config_before_set.stdout_lines | difference(config_after_set.stdout_lines) }}"
+  changed_when: "config_before_set.stdout_lines | difference(config_after_set.stdout_lines)"
