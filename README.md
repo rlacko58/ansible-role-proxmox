@@ -37,7 +37,7 @@ Output:
 pct create 999 local:vztmpl/ubuntu-21.04-standard_21.04-1_amd64.tar.gz --rootfs ssd:8 --cores 2 --net0 name=eth0,bridge=vmbr0,ip=dhcp --password 12345
 ```
 
-If the argument has a `-`, then it replaced with `_`.  
+If the argument has a `-`, then it is replaced with `_`.  
 For example: `ignore-unpack-errors` becomes `ignore_unpack_errors`
 
 `rootfs` argument is separated into `rootfs_create` and `rootfs_set`. 
@@ -62,7 +62,7 @@ Example Playbook
   tasks:
     - name: Create container
       include_role:
-        name: ansible-role-proxmox
+        name: rlacko58.proxmox
         tasks_from: create
       vars:
         vmid: 999
@@ -84,14 +84,33 @@ Example Playbook
   tasks:
     - name: Change state of container
     include_role:
-      name: ansible-role-proxmox
+      name: rlacko58.proxmox
       tasks_from: container
     vars:
       vmid: "{{ item }}"
-      state: stop # shutdown, start, reboot, destroy
+      state: stop # or shutdown, start, reboot, destroy
     loop:
       - 103
       - 104
+```
+
+**Destroy**
+
+```yml
+- hosts: all
+  become: false
+
+  tasks:
+    - name: Change state of container
+    include_role:
+      name: rlacko58.proxmox
+      tasks_from: container
+    vars:
+      vmid: 102
+      state: destroy
+      destroy_unreferenced_disks: yes
+      force: yes
+      purge: yes
 ```
 
 License
