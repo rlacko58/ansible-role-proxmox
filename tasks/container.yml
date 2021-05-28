@@ -34,43 +34,6 @@
   import_tasks: "commands/container/set.yml"
   when: state is undefined and container_exists.stdout is match("true")
 
-- name: Check status of container
-  command: 'pct status {{ vmid }}'
-  register: container_status
-  changed_when: false
-  when: state is defined and container_exists.stdout is match("true")
-
-- name: Reboot (pct reboot ...)
-  import_tasks: "commands/container/reboot.yml"
-  when: >-
-    state is defined and state == "reboot" and 
-    container_exists.stdout is match("true") and container_status.stdout is match("status: running")
-
-- name: Start if Reboot requested and stopped or just Start requested (pct start ...)
-  import_tasks: "commands/container/start.yml"
-  when: >-
-    state is defined and (state == "reboot" or state == "start") and
-    container_exists.stdout is match("true") and container_status.stdout is match("status: stopped")
-
-- name: Stop (pct stop ...)
-  import_tasks: "commands/container/stop.yml"
-  when: >-
-    state is defined and state == "stop" and 
-    container_exists.stdout is match("true") and container_status.stdout is match("status: running")
-
-- name: Shutdown (pct shutdown ...)
-  import_tasks: "commands/container/shutdown.yml"
-  when: >-
-    state is defined and state == "shutdown" and 
-    container_exists.stdout is match("true") and container_status.stdout is match("status: running")
-
-- name: Destroy (pct destroy ...)
-  import_tasks: "commands/container/destroy.yml"
-  when: >-
-    state is defined and state == "destroy" and container_exists.stdout is match("true")
-
-- name: Already destroyed
-  debug:
-    msg: Container is already destroyed
-  when: >-
-    state is defined and state == "destroy" and container_exists.stdout is match("false")
+- name: Change state of container
+  import_tasks: "commands/container_state.yml"
+  when: state is defined
