@@ -1,4 +1,4 @@
-Ansible Role Proxmox
+Ansible Role: Proxmox
 =========
 
 Management of Proxmox from Ansible using pct (and soon qm) commands.
